@@ -4,13 +4,18 @@ const handler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
 ) => {
-  
-  console.log(`Hello dice: Hola desde logs`);
-  
+  const myImportantVariable = process.env.MY_IMPORTANT_VARIABLE;
+
+  if (!myImportantVariable) {
+    throw "Missin MY_IMPORTANT_VARIABLE";
+  }
+
+  console.log(`Variables dice: Hola desde logs`);
+
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Hello World!",
+      myImportantVariable,
     }),
     headers: {
       "Content-Type": "application/json",
